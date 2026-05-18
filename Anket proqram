@@ -1,0 +1,106 @@
+using System;
+using System.Collections.Generic;
+
+class Survey
+{
+    public int id;
+    public string ad;
+    public List<string> suallar = new List<string>();
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<Survey> list = new List<Survey>();
+        int saygac = 1;
+
+        while (true)
+        {
+            Console.WriteLine("1-Anket yarat");
+            Console.WriteLine("2-Anketlere bax");
+            Console.WriteLine("3-Cavab ver");
+            Console.WriteLine("4-Cixis");
+
+            int secim = int.Parse(Console.ReadLine());
+
+            if (secim == 1)
+            {
+                Survey s = new Survey();
+
+                s.id = saygac;
+                saygac++;
+
+                Console.Write("Anket adi daxil et: ");
+                s.ad = Console.ReadLine();
+
+                Console.Write("Nece sual olacaq: ");
+                int n = int.Parse(Console.ReadLine());
+
+                for (int i = 0; i < n; i++)
+                {
+                    Console.Write((i + 1) + ". suali yaz: ");
+                    string x = Console.ReadLine();
+
+                    s.suallar.Add(x);
+                }
+
+                list.Add(s);
+
+                Console.WriteLine("Anket yaradildi");
+            }
+
+            else if (secim == 2)
+            {
+                if (list.Count == 0)
+                {
+                    Console.WriteLine("Anket yoxdur");
+                }
+                else
+                {
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        Console.WriteLine("ID: " + list[i].id);
+                        Console.WriteLine("Ad: " + list[i].ad);
+
+                        for (int j = 0; j < list[i].suallar.Count; j++)
+                        {
+                            Console.WriteLine("Sual: " + list[i].suallar[j]);
+                        }
+                    }
+                }
+            }
+
+            else if (secim == 3)
+            {
+                Console.Write("ID daxil et: ");
+                int id = int.Parse(Console.ReadLine());
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    if (list[i].id == id)
+                    {
+                        for (int j = 0; j < list[i].suallar.Count; j++)
+                        {
+                            Console.WriteLine(list[i].suallar[j]);
+                            Console.ReadLine();
+                        }
+
+                        Console.WriteLine("Cavablar goturuldu");
+                    }
+                }
+            }
+
+            else if (secim == 4)
+            {
+                Console.WriteLine("Program bitdi");
+                break;
+            }
+
+            else
+            {
+                Console.WriteLine("Yanlis secim");
+            }
+        }
+    }
+}
